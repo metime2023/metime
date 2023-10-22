@@ -39,7 +39,7 @@ public class Alcohol {
     private Category category;
 
     @Enumerated(EnumType.STRING)
-    private Keywords keywords;
+    private Keyword keyword;
 
     @Embedded
     private Comments comments;
@@ -50,13 +50,13 @@ public class Alcohol {
     private String imageUrl;
 
     @Builder
-    private Alcohol(AlcoholName name, Description description, Price price, Category category, Keywords keywords,
+    private Alcohol(AlcoholName name, Description description, Price price, Category category, Keyword keyword,
         Distributor distributor, String imageUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
-        this.keywords = keywords;
+        this.keyword = keyword;
         this.distributor = distributor;
         this.imageUrl = imageUrl;
     }

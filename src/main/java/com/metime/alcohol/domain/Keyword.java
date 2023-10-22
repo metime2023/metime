@@ -7,14 +7,14 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum Keywords {
+public enum Keyword {
 
     HONEY(1, "꿀");
 
     private final long id;
     private final String title;
 
-    public static Keywords from(long id) {
+    public static Keyword from(long id) {
         return Arrays.stream(values())
             .filter(keyword -> keyword.id == id)
             .findFirst()
