@@ -16,7 +16,7 @@ public enum Keywords {
 
     public static Keywords from(long id) {
         return Arrays.stream(values())
-            .filter(category -> category.id == id)
+            .filter(keyword -> keyword.id == id)
             .findFirst()
             .orElseThrow(() -> new RuntimeException());
     }

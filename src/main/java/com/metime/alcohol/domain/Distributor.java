@@ -18,7 +18,7 @@ public enum Distributor {
 
     public static Distributor from(long id) {
         return Arrays.stream(values())
-            .filter(category -> category.id == id)
+            .filter(distributor -> distributor.id == id)
             .findFirst()
             .orElseThrow(() -> new RuntimeException());
     }
