@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: metime_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: metime
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: metime
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/master/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./mysql/master/data:/var/lib/mysql
+      - ./mysql/master/initdb.d:/docker-entrypoint-initdb.d
+    command: ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_general_ci"]
