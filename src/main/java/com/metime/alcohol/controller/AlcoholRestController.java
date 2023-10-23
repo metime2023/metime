@@ -28,4 +28,9 @@ public class AlcoholRestController {
                 .map(AlcoholResponse::from)
                 .toList();
     }
+
+    @GetMapping("/alcohols/{alcoholId}")
+    public AlcoholDetailPageResponse alcoholDetail(@PathVariable long alcoholId) {
+        return AlcoholDetailPageResponse.from(alcoholService.alcoholDetail(alcoholId));
+    }
 }
