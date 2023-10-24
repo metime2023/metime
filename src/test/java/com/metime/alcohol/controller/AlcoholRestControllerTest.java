@@ -35,11 +35,12 @@ class AlcoholRestControllerTest {
     void 주류리스트_조회_성공() throws Exception {
         // given
         List<AlcoholDto> alcohols = List.of(new AlcoholDto(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0));
-        PagingCondition pagingCondition = new PagingCondition(2, 5, "recommend", 0);
-        given(alcoholService.getAlcoholsPerPage(eq(pagingCondition.cursorNo()), eq(pagingCondition.displayPerPage()), any(), eq(pagingCondition.priceFilter()))).willReturn(alcohols);
+        PagingCondition pagingCondition = new PagingCondition(2, 5, "recommend", 0, 1000);
+        given(alcoholService.getAlcoholsPerPage(eq(pagingCondition.cursorNo()), eq(pagingCondition.displayPerPage()), any(), eq(pagingCondition.minPrice()),
+                eq(pagingCondition.maxPrice()))).willReturn(alcohols);
 
         // when
-        mockMvc.perform(get("/alcohols?cursorNo=2&displayPerPage=5&sort=recommend&priceFilter=0")
+        mockMvc.perform(get("/alcohols?cursorNo=2&displayPerPage=5&sort=recommend&minPrice=0&maxPrice=1000")
                 )
                 .andExpect(status().isOk())
                 .andDo(print());

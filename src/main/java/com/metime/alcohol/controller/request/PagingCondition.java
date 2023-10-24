@@ -10,7 +10,8 @@ public record PagingCondition(
         int displayPerPage,
         @SortCondition(enumClass = AlcoholSort.class, ignoreCase = true)
         String sort,
-        int priceFilter
+        int minPrice,
+        int maxPrice
 ) {
 
 }

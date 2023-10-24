@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AlcoholService {
 
-    public List<AlcoholDto> getAlcoholsPerPage(long cursorNo, int displayPerPage, String sort, int priceFilter) {
+    public List<AlcoholDto> getAlcoholsPerPage(long cursorNo, int displayPerPage, String sort, int minPrice,
+            int maxPrice) {
         return List.of(new AlcoholDto(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0));
     }
 
