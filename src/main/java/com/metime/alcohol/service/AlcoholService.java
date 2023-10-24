@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 public class AlcoholService {
 
     public List<AlcoholDto> getAlcoholsPerPage(long cursorNo, int displayPerPage, String sort, int priceFilter) {
-        return List.of(new AlcoholDto(AlcoholName.from("맥주"), Keyword.HONEY, Category.BEER, 0, 0));
+        return List.of(new AlcoholDto(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0));
     }
 
     public AlcoholDto alcoholDetail(long alcoholId) {
-        return new AlcoholDto(AlcoholName.from("맥주"), Keyword.HONEY, Category.BEER, 0, 0);
+        return new AlcoholDto(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0);
     }
 }
