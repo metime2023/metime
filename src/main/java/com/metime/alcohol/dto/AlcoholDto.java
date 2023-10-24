@@ -15,12 +15,16 @@ public class AlcoholDto {
     private long likeCount;
     private long commentCount;
 
-    public AlcoholDto(AlcoholName alcoholName, List<Keyword> keyword, Category category, long likeCount,
+    private AlcoholDto(AlcoholName alcoholName, List<Keyword> keyword, Category category, long likeCount,
             long commentCount) {
         this.alcoholName = alcoholName;
         this.keyword = keyword == null ? new ArrayList<>() : keyword;
         this.category = category;
         this.likeCount = likeCount;
         this.commentCount = commentCount;
+    }
+
+    public static AlcoholDto of(AlcoholName alcoholName, List<Keyword> keyword, Category category, long likeCount, long commentCount) {
+        return new AlcoholDto(alcoholName, keyword, category, likeCount, commentCount);
     }
 }

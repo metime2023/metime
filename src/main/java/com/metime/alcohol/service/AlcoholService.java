@@ -12,10 +12,10 @@ public class AlcoholService {
 
     public List<AlcoholDto> getAlcoholsPerPage(long cursorNo, int displayPerPage, String sort, int minPrice,
             int maxPrice) {
-        return List.of(new AlcoholDto(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0));
+        return List.of(AlcoholDto.of(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0));
     }
 
     public AlcoholDto alcoholDetail(long alcoholId) {
-        return new AlcoholDto(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0);
+        return AlcoholDto.of(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0);
     }
 }

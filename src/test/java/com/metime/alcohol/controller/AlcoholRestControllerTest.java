@@ -34,7 +34,7 @@ class AlcoholRestControllerTest {
     @Test
     void 주류리스트_조회_성공() throws Exception {
         // given
-        List<AlcoholDto> alcohols = List.of(new AlcoholDto(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0));
+        List<AlcoholDto> alcohols = List.of(AlcoholDto.of(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0));
         PagingCondition pagingCondition = new PagingCondition(2, 5, "recommend", 0, 1000);
         given(alcoholService.getAlcoholsPerPage(eq(pagingCondition.cursorNo()), eq(pagingCondition.displayPerPage()), any(), eq(pagingCondition.minPrice()),
                 eq(pagingCondition.maxPrice()))).willReturn(alcohols);
@@ -81,7 +81,7 @@ class AlcoholRestControllerTest {
     void 주류리스트_상세조회_성공() throws Exception {
         // given
         long alcoholId = 1;
-        AlcoholDto beer = new AlcoholDto(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0);
+        AlcoholDto beer = AlcoholDto.of(AlcoholName.from("맥주"), List.of(Keyword.HONEY), Category.BEER, 0, 0);
         given(alcoholService.alcoholDetail(alcoholId)).willReturn(beer);
 
         // when
