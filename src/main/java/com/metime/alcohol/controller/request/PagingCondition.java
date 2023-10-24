@@ -14,4 +14,9 @@ public record PagingCondition(
         int maxPrice
 ) {
 
+        private static final int DEFAULT_VALUE = 0;
+
+        public boolean isCursorDefaultValue() {
+                return this.cursorNo <= DEFAULT_VALUE;
+        }
 }

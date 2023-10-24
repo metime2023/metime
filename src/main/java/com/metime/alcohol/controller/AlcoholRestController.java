@@ -19,7 +19,7 @@ public class AlcoholRestController {
 
     @GetMapping("/alcohols")
     public List<AlcoholResponse> alcohols(@ModelAttribute PagingCondition pagingCondition) {
-        if (pagingCondition.cursorNo() <= 0) {
+        if (pagingCondition.isCursorDefaultValue()) {
             // select max(alcoholId) from alcohol
         }
 
