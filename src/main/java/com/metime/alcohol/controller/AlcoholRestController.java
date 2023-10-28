@@ -23,7 +23,7 @@ public class AlcoholRestController {
             // select max(alcoholId) from alcohol
         }
 
-        return alcoholService.getAlcoholsPerPage(pagingCondition.cursorNo(),pagingCondition.displayPerPage(),pagingCondition.sort(), pagingCondition.minPrice(), pagingCondition.maxPrice())
+        return alcoholService.getAlcoholsPerPage(pagingCondition)
                 .stream()
                 .map(AlcoholResponse::from)
                 .toList();

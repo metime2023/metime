@@ -2,6 +2,10 @@ package com.metime.alcohol.domain;
 
 import java.util.Optional;
 
+import com.metime.alcohol.domain.distributor.Distributor;
+import com.metime.alcohol.domain.distributor.Distributors;
+import com.metime.alcohol.domain.keyword.Keyword;
+import com.metime.alcohol.domain.keyword.Keywords;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -33,13 +37,13 @@ public class Alcohol {
     private Price price;
 
     @Enumerated(EnumType.STRING)
-    private Distributor distributor;
-
-    @Enumerated(EnumType.STRING)
     private Category category;
 
-    @Enumerated(EnumType.STRING)
-    private Keyword keyword;
+    @Embedded
+    private Distributors distributors;
+
+    @Embedded
+    private Keywords keywords;
 
     @Embedded
     private Comments comments;
@@ -50,14 +54,16 @@ public class Alcohol {
     private String imageUrl;
 
     @Builder
-    private Alcohol(AlcoholName name, Description description, Price price, Category category, Keyword keyword,
-        Distributor distributor, String imageUrl) {
+    private Alcohol(AlcoholName name, Description description, Price price, Category category,
+                    Comments comments, Likes likes, String imageUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
-        this.keyword = keyword;
-        this.distributor = distributor;
+        this.distributors = new Distributors();
+        this.keywords = new Keywords();
+        this.comments = comments;
+        this.likes = likes;
         this.imageUrl = imageUrl;
     }
 
@@ -77,5 +83,28 @@ public class Alcohol {
         return Optional.ofNullable(price)
             .map(Price::getValue)
             .orElse(0d);
+    }
+
+    public void allocate(Distributor distributor) {
+        distributors.distribute(this, distributor);
+    }
+
+    public void addKeyword(Keyword keyword) {
+        keywords.add(this, keyword);
+    }
+
+    // stub
+    public AlcoholName getAlcoholName() {
+        return name;
+    }
+
+    // stub
+    public long getLikesCount() {
+        return 0;
+    }
+
+    // stub
+    public long getCommentsCount() {
+        return 0;
     }
 }
