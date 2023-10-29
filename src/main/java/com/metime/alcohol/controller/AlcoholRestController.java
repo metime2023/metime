@@ -23,7 +23,7 @@ public class AlcoholRestController {
             // select max(alcoholId) from alcohol
         }
 
-        return alcoholService.getAlcoholsPerPage(pagingCondition)
+        return alcoholService.getAlcoholPerPage(pagingCondition)
                 .stream()
                 .map(AlcoholResponse::from)
                 .toList();

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AlcoholService {
 
-    public List<AlcoholDto> getAlcoholsPerPage(PagingCondition pagingCondition) {
+    public List<AlcoholDto> getAlcoholPerPage(PagingCondition pagingCondition) {
         Alcohol alcohol = Alcohol.builder()
                 .name(AlcoholName.from("맥주"))
                 .category(Category.BEER)
