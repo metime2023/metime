@@ -56,7 +56,7 @@ class AlcoholRestControllerTest {
         given(alcoholService.getAlcoholPerPage(eq(pagingCondition))).willReturn(alcoholList);
 
         // when
-        mockMvc.perform(get("/alcohols?cursorNo=2&displayPerPage=5&sort=recommend&minPrice=0&maxPrice=1000"))
+        mockMvc.perform(get("/alcohol?cursorNo=2&displayPerPage=5&sort=recommend&minPrice=0&maxPrice=1000"))
                 .andExpect(status().isOk())
                 .andDo(print());
 
@@ -69,7 +69,7 @@ class AlcoholRestControllerTest {
         // given
 
         // when
-        mockMvc.perform(get("/alcohols?cursorNo=0&displayPerPage=3&sort=nothing")
+        mockMvc.perform(get("/alcohol?cursorNo=0&displayPerPage=3&sort=nothing")
                 )
                 .andExpect(status().isBadRequest())
                 .andDo(print());
@@ -83,7 +83,7 @@ class AlcoholRestControllerTest {
         // given
 
         // when
-        mockMvc.perform(get("/alcohols?cursorNo=0&sort=recommend")
+        mockMvc.perform(get("/alcohol?cursorNo=0&sort=recommend")
                 )
                 .andExpect(status().isBadRequest())
                 .andDo(print());
@@ -100,7 +100,7 @@ class AlcoholRestControllerTest {
         given(alcoholService.alcoholDetail(eq(alcoholId))).willReturn(beer);
 
         // when
-        mockMvc.perform(get("/alcohols/1")
+        mockMvc.perform(get("/alcohol/1")
                 )
                 .andExpect(status().isOk())
                 .andDo(print());
