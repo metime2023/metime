@@ -23,10 +23,7 @@ public class AlcoholRestController {
             // select max(alcoholId) from alcohol
         }
 
-        return alcoholService.getAlcoholPerPage(pagingCondition)
-                .stream()
-                .map(AlcoholResponse::from)
-                .toList();
+        return AlcoholResponse.listFrom(alcoholService.getAlcoholPerPage(pagingCondition));
     }
 
     @GetMapping("/alcohol/{alcoholId}")

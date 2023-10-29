@@ -9,7 +9,6 @@ public record AlcoholResponse(
     String description,
     double price,
     String category,
-    List<String> distributors,
     List<String> keywords,
     long likeCount,
     long commentCount
@@ -21,9 +20,14 @@ public record AlcoholResponse(
             alcoholDto.description(),
             alcoholDto.price(),
             alcoholDto.category().getTitle(),
-            alcoholDto.convertDistributorsToNameList(),
             alcoholDto.convertKeywordsToTitleList(),
             alcoholDto.likeCount(),
             alcoholDto.commentCount());
+    }
+
+    public static List<AlcoholResponse> listFrom(List<AlcoholDto> alcoholDtoList) {
+        return alcoholDtoList.stream()
+            .map(AlcoholResponse::from)
+            .toList();
     }
 }

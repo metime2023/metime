@@ -28,6 +28,7 @@ public class AlcoholService {
 
     public AlcoholDto alcoholDetail(long alcoholId) {
         Alcohol alcohol = Alcohol.builder().build();
+
         return AlcoholDto.from(alcohol);
     }
 }

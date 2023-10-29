@@ -27,9 +27,15 @@ public record AlcoholDto(
             alcohol.getKeywords(), alcohol.getLikesCount(), alcohol.getCommentsCount());
     }
 
+    public static AlcoholDto exceptDistributorsFrom(Alcohol alcohol) {
+        return new AlcoholDto(alcohol.getName(), alcohol.getDescription(), alcohol.getPrice(),
+            alcohol.getCategory(), null,
+            alcohol.getKeywords(), alcohol.getLikesCount(), alcohol.getCommentsCount());
+    }
+
     public static List<AlcoholDto> listFrom(List<Alcohol> alcoholList) {
         return alcoholList.stream()
-            .map(AlcoholDto::from)
+            .map(AlcoholDto::exceptDistributorsFrom)
             .toList();
     }
 
