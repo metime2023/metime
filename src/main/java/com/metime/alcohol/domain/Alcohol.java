@@ -94,11 +94,6 @@ public class Alcohol {
     }
 
     // stub
-    public AlcoholName getAlcoholName() {
-        return name;
-    }
-
-    // stub
     public long getLikesCount() {
         return 0;
     }

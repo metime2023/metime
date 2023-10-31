@@ -1,32 +1,33 @@
 package com.metime.alcohol.controller.response;
 
-import com.metime.alcohol.domain.distributor.Distributor;
-import com.metime.alcohol.domain.keyword.Keyword;
 import com.metime.alcohol.dto.AlcoholDto;
 
 import java.util.List;
 
 public record AlcoholResponse(
-		String name,
-		List<String> distributors,
-		List<String> keywords,
-		String category,
-		long likeCount,
-		long commentCount
+    String name,
+    String description,
+    double price,
+    String category,
+    List<String> keywords,
+    long likeCount,
+    long commentCount
 ) {
 
-	public static AlcoholResponse from(AlcoholDto alcoholDto) {
-		return new AlcoholResponse(
-				alcoholDto.getAlcoholName().getValue(),
-				alcoholDto.getDistributors().getDistributors()
-						.stream().map(Distributor::getName)
-						.toList(),
-				alcoholDto.getKeywords().getKeywords()
-						.stream()
-						.map(Keyword::getTitle)
-						.toList(),
-				alcoholDto.getCategory().getTitle(),
-				alcoholDto.getLikeCount(),
-				alcoholDto.getCommentCount());
-	}
+    public static AlcoholResponse from(AlcoholDto alcoholDto) {
+        return new AlcoholResponse(
+            alcoholDto.name(),
+            alcoholDto.description(),
+            alcoholDto.price(),
+            alcoholDto.category().getTitle(),
+            alcoholDto.convertKeywordsToTitleList(),
+            alcoholDto.likeCount(),
+            alcoholDto.commentCount());
+    }
+
+    public static List<AlcoholResponse> listFrom(List<AlcoholDto> alcoholDtoList) {
+        return alcoholDtoList.stream()
+            .map(AlcoholResponse::from)
+            .toList();
+    }
 }

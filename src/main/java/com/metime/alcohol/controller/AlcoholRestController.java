@@ -17,19 +17,16 @@ public class AlcoholRestController {
 
     private final AlcoholService alcoholService;
 
-    @GetMapping("/alcohols")
+    @GetMapping("/alcohol")
     public List<AlcoholResponse> alcohols(@ModelAttribute PagingCondition pagingCondition) {
         if (pagingCondition.isCursorDefaultValue()) {
             // select max(alcoholId) from alcohol
         }
 
-        return alcoholService.getAlcoholsPerPage(pagingCondition)
-                .stream()
-                .map(AlcoholResponse::from)
-                .toList();
+        return AlcoholResponse.listFrom(alcoholService.getAlcoholPerPage(pagingCondition));
     }
 
-    @GetMapping("/alcohols/{alcoholId}")
+    @GetMapping("/alcohol/{alcoholId}")
     public AlcoholDetailPageResponse alcoholDetail(@PathVariable long alcoholId) {
         return AlcoholDetailPageResponse.from(alcoholService.alcoholDetail(alcoholId));
     }

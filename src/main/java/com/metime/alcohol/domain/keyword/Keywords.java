@@ -11,7 +11,7 @@ import java.util.List;
 @Embeddable
 public class Keywords {
 
-	@OneToMany(mappedBy = "alcohol")
+	@OneToMany(mappedBy = "alcohol", cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<AlcoholKeyword> keywords = new ArrayList<>();
 
 	public void add(Alcohol alcohol, Keyword keyword) {
