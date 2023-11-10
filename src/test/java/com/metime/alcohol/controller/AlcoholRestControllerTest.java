@@ -1,5 +1,10 @@
 package com.metime.alcohol.controller;
 
+import static com.metime.alcohol.fixture.alcohol.AlcoholFixture.ALCOHOL_FIXTURE;
+import static com.metime.alcohol.fixture.distributor.DistributorFixture.CONVENIENCE_STORE;
+import static com.metime.alcohol.fixture.distributor.DistributorFixture.SUPERMARKET;
+import static com.metime.alcohol.fixture.keyword.KeywordFixture.DILUTED_SOJU;
+import static com.metime.alcohol.fixture.keyword.KeywordFixture.DISTILLED_SOJU;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -8,14 +13,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.metime.alcohol.controller.request.PagingCondition;
 import com.metime.alcohol.domain.Alcohol;
-import com.metime.alcohol.domain.AlcoholName;
-import com.metime.alcohol.domain.Category;
-import com.metime.alcohol.domain.distributor.Distributor;
-import com.metime.alcohol.domain.keyword.Keyword;
 import com.metime.alcohol.dto.AlcoholDto;
 import com.metime.alcohol.service.AlcoholService;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,18 +35,15 @@ class AlcoholRestControllerTest {
     @MockBean
     private AlcoholService alcoholService;
 
-    private Alcohol alcohol;
+    private static Alcohol alcohol;
 
-    @BeforeEach
-    void setUp() {
-        alcohol = Alcohol.builder()
-                .name(AlcoholName.from("맥주"))
-                .category(Category.BEER)
-                .build();
-        Distributor distributor = new Distributor("편의점");
-        alcohol.allocate(distributor);
-        Keyword keyword = new Keyword("꿀");
-        alcohol.addKeyword(keyword);
+    @BeforeAll
+    static void beforeAll() {
+        alcohol = ALCOHOL_FIXTURE;
+        alcohol.allocate(CONVENIENCE_STORE);
+        alcohol.allocate(SUPERMARKET);
+        alcohol.addKeyword(DILUTED_SOJU);
+        alcohol.addKeyword(DISTILLED_SOJU);
     }
 
     @DisplayName("주류 리스트 조회성공")
