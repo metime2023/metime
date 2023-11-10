@@ -2,12 +2,12 @@ package com.metime.alcohol.service;
 
 import com.metime.alcohol.controller.request.PagingCondition;
 import com.metime.alcohol.domain.Alcohol;
-import com.metime.alcohol.domain.AlcoholName;
-import com.metime.alcohol.domain.Category;
 import com.metime.alcohol.dto.AlcoholDto;
 import com.metime.alcohol.repository.AlcoholRepository;
 
 import java.util.List;
+
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +27,8 @@ public class AlcoholService {
     }
 
     public AlcoholDto alcoholDetail(long alcoholId) {
-        Alcohol alcohol = Alcohol.builder().build();
+        Alcohol alcohol = alcoholRepository.findById(alcoholId)
+                .orElseThrow(EntityNotFoundException::new);
 
         return AlcoholDto.from(alcohol);
     }

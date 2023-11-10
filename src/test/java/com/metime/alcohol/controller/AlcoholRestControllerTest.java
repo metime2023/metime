@@ -1,5 +1,10 @@
 package com.metime.alcohol.controller;
 
+import static com.metime.alcohol.fixture.alcohol.AlcoholFixture.ALCOHOL_FIXTURE;
+import static com.metime.alcohol.fixture.distributor.DistributorFixture.CONVENIENCE_STORE;
+import static com.metime.alcohol.fixture.distributor.DistributorFixture.SUPERMARKET;
+import static com.metime.alcohol.fixture.keyword.KeywordFixture.DILUTED_SOJU;
+import static com.metime.alcohol.fixture.keyword.KeywordFixture.DISTILLED_SOJU;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -8,103 +13,97 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.metime.alcohol.controller.request.PagingCondition;
 import com.metime.alcohol.domain.Alcohol;
-import com.metime.alcohol.domain.AlcoholName;
-import com.metime.alcohol.domain.Category;
-import com.metime.alcohol.domain.distributor.Distributor;
-import com.metime.alcohol.domain.keyword.Keyword;
 import com.metime.alcohol.dto.AlcoholDto;
 import com.metime.alcohol.service.AlcoholService;
+
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 @WebMvcTest(AlcoholRestController.class)
 class AlcoholRestControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @MockBean
-    private AlcoholService alcoholService;
+	@MockBean
+	private AlcoholService alcoholService;
 
-    private Alcohol alcohol;
+	private static Alcohol alcohol;
+	private static final String ENDPOINT = "/alcohol";
 
-    @BeforeEach
-    void setUp() {
-        alcohol = Alcohol.builder()
-                .name(AlcoholName.from("맥주"))
-                .category(Category.BEER)
-                .build();
-        Distributor distributor = new Distributor("편의점");
-        alcohol.allocate(distributor);
-        Keyword keyword = new Keyword("꿀");
-        alcohol.addKeyword(keyword);
-    }
+	@BeforeAll
+	static void beforeAll() {
+		alcohol = ALCOHOL_FIXTURE;
+		alcohol.allocate(CONVENIENCE_STORE);
+		alcohol.allocate(SUPERMARKET);
+		alcohol.addKeyword(DILUTED_SOJU);
+		alcohol.addKeyword(DISTILLED_SOJU);
+	}
 
-    @DisplayName("주류 리스트 조회성공")
-    @Test
-    void 주류리스트_조회_성공() throws Exception {
-        // given
-        List<AlcoholDto> alcoholList = AlcoholDto.listFrom(List.of(alcohol));
-        PagingCondition pagingCondition = new PagingCondition(2, 5, "recommend", 0, 1000);
-        given(alcoholService.getAlcoholPerPage(eq(pagingCondition))).willReturn(alcoholList);
+	@DisplayName("주류 리스트 조회성공")
+	@Test
+	void 주류리스트_조회_성공() throws Exception {
+		// given
+		List<AlcoholDto> alcoholList = AlcoholDto.listFrom(List.of(alcohol));
+		PagingCondition pagingCondition =
+				new PagingCondition(2, 5, "recommend", 0, 1000);
+		given(alcoholService.getAlcoholPerPage(eq(pagingCondition))).willReturn(alcoholList);
 
-        // when
-        mockMvc.perform(get("/alcohol?cursorNo=2&displayPerPage=5&sort=recommend&minPrice=0&maxPrice=1000"))
-                .andExpect(status().isOk())
-                .andDo(print());
+		// when
+		ResultActions resultActions = mockMvc.perform(get(ENDPOINT + "?cursorNo=2&displayPerPage=5&sort=recommend&minPrice=0&maxPrice=1000"));
 
-        // then
-    }
+		// then
+		resultActions.andExpect(status().isOk())
+				.andDo(print());
+	}
 
-    @DisplayName("주류 리스트 조회실패 : 존재하지않는 정렬조건 입력")
-    @Test
-    void 주류리스트_조회_실패_존재하지않는_정렬조건() throws Exception {
-        // given
+	@DisplayName("주류 리스트 조회실패 : 존재하지않는 정렬조건 입력")
+	@Test
+	void 주류리스트_조회_실패_존재하지않는_정렬조건() throws Exception {
+		// given
 
-        // when
-        mockMvc.perform(get("/alcohol?cursorNo=0&displayPerPage=3&sort=nothing")
-                )
-                .andExpect(status().isBadRequest())
-                .andDo(print());
+		// when
+		ResultActions resultActions = mockMvc.perform(get(ENDPOINT + "?cursorNo=0&displayPerPage=3&sort=nothing"));
 
-        // then
-    }
+		// then
+		resultActions.andExpect(status().isBadRequest())
+				.andDo(print());
+	}
 
-    @DisplayName("주류 리스트 조회실패 : 요청값 검증통과 실패")
-    @Test
-    void 주류리스트_조회_실패_요청값_검증통과실패() throws Exception {
-        // given
+	@DisplayName("주류 리스트 조회실패 : 요청값 검증통과 실패")
+	@Test
+	void 주류리스트_조회_실패_요청값_검증통과실패() throws Exception {
+		// given
 
-        // when
-        mockMvc.perform(get("/alcohol?cursorNo=0&sort=recommend")
-                )
-                .andExpect(status().isBadRequest())
-                .andDo(print());
+		// when
+		ResultActions resultActions = mockMvc.perform(get(ENDPOINT + "?cursorNo=0&sort=recommend"));
 
-        // then
-    }
+		// then
+		resultActions.andExpect(status().isBadRequest())
+				.andDo(print());
+	}
 
-    @DisplayName("주류 리스트 상세조회 성공")
-    @Test
-    void 주류리스트_상세조회_성공() throws Exception {
-        // given
-        long alcoholId = 1;
-        AlcoholDto beer = AlcoholDto.from(alcohol);
-        given(alcoholService.alcoholDetail(eq(alcoholId))).willReturn(beer);
+	@DisplayName("주류 리스트 상세조회 성공")
+	@Test
+	void 주류리스트_상세조회_성공() throws Exception {
+		// given
+		long alcoholId = 1;
+		AlcoholDto beer = AlcoholDto.from(alcohol);
+		given(alcoholService.alcoholDetail(eq(alcoholId))).willReturn(beer);
 
-        // when
-        mockMvc.perform(get("/alcohol/1")
-                )
-                .andExpect(status().isOk())
-                .andDo(print());
+		// when
+		ResultActions resultActions = mockMvc.perform(get(ENDPOINT + "/1"));
 
-        // then
-    }
+		// then
+		resultActions.andExpect(status().isOk())
+				.andDo(print());
+	}
 }
