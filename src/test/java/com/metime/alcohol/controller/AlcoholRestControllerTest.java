@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 @WebMvcTest(AlcoholRestController.class)
 class AlcoholRestControllerTest {
@@ -53,15 +54,15 @@ class AlcoholRestControllerTest {
 		// given
 		List<AlcoholDto> alcoholList = AlcoholDto.listFrom(List.of(alcohol));
 		PagingCondition pagingCondition =
-                new PagingCondition(2, 5, "recommend", 0, 1000);
+				new PagingCondition(2, 5, "recommend", 0, 1000);
 		given(alcoholService.getAlcoholPerPage(eq(pagingCondition))).willReturn(alcoholList);
 
 		// when
-		mockMvc.perform(get(ENDPOINT + "?cursorNo=2&displayPerPage=5&sort=recommend&minPrice=0&maxPrice=1000"))
-				.andExpect(status().isOk())
-				.andDo(print());
+		ResultActions resultActions = mockMvc.perform(get(ENDPOINT + "?cursorNo=2&displayPerPage=5&sort=recommend&minPrice=0&maxPrice=1000"));
 
 		// then
+		resultActions.andExpect(status().isOk())
+				.andDo(print());
 	}
 
 	@DisplayName("주류 리스트 조회실패 : 존재하지않는 정렬조건 입력")
@@ -70,11 +71,11 @@ class AlcoholRestControllerTest {
 		// given
 
 		// when
-		mockMvc.perform(get(ENDPOINT + "?cursorNo=0&displayPerPage=3&sort=nothing"))
-				.andExpect(status().isBadRequest())
-				.andDo(print());
+		ResultActions resultActions = mockMvc.perform(get(ENDPOINT + "?cursorNo=0&displayPerPage=3&sort=nothing"));
 
 		// then
+		resultActions.andExpect(status().isBadRequest())
+				.andDo(print());
 	}
 
 	@DisplayName("주류 리스트 조회실패 : 요청값 검증통과 실패")
@@ -83,11 +84,11 @@ class AlcoholRestControllerTest {
 		// given
 
 		// when
-		mockMvc.perform(get(ENDPOINT + "?cursorNo=0&sort=recommend"))
-				.andExpect(status().isBadRequest())
-				.andDo(print());
+		ResultActions resultActions = mockMvc.perform(get(ENDPOINT + "?cursorNo=0&sort=recommend"));
 
 		// then
+		resultActions.andExpect(status().isBadRequest())
+				.andDo(print());
 	}
 
 	@DisplayName("주류 리스트 상세조회 성공")
@@ -99,11 +100,10 @@ class AlcoholRestControllerTest {
 		given(alcoholService.alcoholDetail(eq(alcoholId))).willReturn(beer);
 
 		// when
-		mockMvc.perform(get(ENDPOINT + "/1")
-				)
-				.andExpect(status().isOk())
-				.andDo(print());
+		ResultActions resultActions = mockMvc.perform(get(ENDPOINT + "/1"));
 
 		// then
+		resultActions.andExpect(status().isOk())
+				.andDo(print());
 	}
 }
