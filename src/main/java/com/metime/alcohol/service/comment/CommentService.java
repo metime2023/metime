@@ -19,8 +19,8 @@ public class CommentService {
 	private final AlcoholRepository alcoholRepository;
 	private final CommentRepository commentRepository;
 
-	public void create(long alcoholId, String content) {
+	public Comment create(long alcoholId, String content) {
 		Alcohol alcohol = alcoholRepository.findById(alcoholId).orElseThrow(DoesNotExistAlcoholException::new);
-		commentRepository.save(Comment.create(alcohol, content));
+		return commentRepository.save(Comment.create(alcohol, content));
 	}
 }
