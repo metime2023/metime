@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class DoesNotExistAlcoholException extends RuntimeException {
+
 	private static final String message = "존재하지 않는 술입니다";
 	private final HttpStatus httpStatus;
 
