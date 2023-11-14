@@ -46,23 +46,18 @@ public class Alcohol {
     private Keywords keywords;
 
     @Embedded
-    private Comments comments;
-
-    @Embedded
     private Likes likes;
 
     private String imageUrl;
 
     @Builder
-    private Alcohol(AlcoholName name, Description description, Price price, Category category,
-                    Comments comments, Likes likes, String imageUrl) {
+    private Alcohol(AlcoholName name, Description description, Price price, Category category, Likes likes, String imageUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
         this.distributors = new Distributors();
         this.keywords = new Keywords();
-        this.comments = comments;
         this.likes = likes;
         this.imageUrl = imageUrl;
     }
