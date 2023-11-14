@@ -43,7 +43,7 @@ class AlcoholServiceTest {
 				new PagingCondition(0, 5, "recommend", 0, 5000);
 
 		// when
-		List<AlcoholDto> alcoholDtoList = alcoholService.getAlcoholPerPage(pagingCondition);
+		List<AlcoholDto> alcoholDtoList = alcoholService.getAlcoholPerPage(pagingCondition.toDto());
 
 		// then
 		assertThat(alcoholDtoList).usingRecursiveFieldByFieldElementComparator()

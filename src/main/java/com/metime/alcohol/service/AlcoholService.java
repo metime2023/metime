@@ -1,8 +1,8 @@
 package com.metime.alcohol.service;
 
-import com.metime.alcohol.controller.request.PagingCondition;
 import com.metime.alcohol.domain.Alcohol;
 import com.metime.alcohol.dto.AlcoholDto;
+import com.metime.alcohol.dto.PagingDto;
 import com.metime.alcohol.repository.AlcoholRepository;
 
 import java.util.List;
@@ -20,8 +20,8 @@ public class AlcoholService {
 
     private final AlcoholRepository alcoholRepository;
 
-    public List<AlcoholDto> getAlcoholPerPage(PagingCondition pagingCondition) {
-        List<Alcohol> alcoholList = alcoholRepository.getAlcoholPerPage(pagingCondition);
+    public List<AlcoholDto> getAlcoholPerPage(PagingDto pagingDto) {
+        List<Alcohol> alcoholList = alcoholRepository.getAlcoholPerPage(pagingDto);
 
         return AlcoholDto.listFrom(alcoholList);
     }

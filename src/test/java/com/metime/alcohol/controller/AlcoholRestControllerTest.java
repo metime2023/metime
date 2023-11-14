@@ -55,7 +55,7 @@ class AlcoholRestControllerTest {
 		List<AlcoholDto> alcoholList = AlcoholDto.listFrom(List.of(alcohol));
 		PagingCondition pagingCondition =
 				new PagingCondition(2, 5, "recommend", 0, 1000);
-		given(alcoholService.getAlcoholPerPage(eq(pagingCondition))).willReturn(alcoholList);
+		given(alcoholService.getAlcoholPerPage(eq(pagingCondition.toDto()))).willReturn(alcoholList);
 
 		// when
 		ResultActions resultActions = mockMvc.perform(get(ENDPOINT + "?cursorNo=2&displayPerPage=5&sort=recommend&minPrice=0&maxPrice=1000"));
