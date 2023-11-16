@@ -1,6 +1,6 @@
-package com.metime.alcohol.controller.comment.response;
+package com.metime.comment.controller.response;
 
-import com.metime.alcohol.domain.Comment;
+import com.metime.comment.domain.Comment;
 
 public record CommentResponse(
 	String anonymousId,

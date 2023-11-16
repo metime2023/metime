@@ -1,13 +1,13 @@
-package com.metime.alcohol.service.comment;
+package com.metime.comment.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.metime.alcohol.common.exception.DoesNotExistAlcoholException;
 import com.metime.alcohol.domain.Alcohol;
-import com.metime.alcohol.domain.Comment;
+import com.metime.comment.domain.Comment;
 import com.metime.alcohol.repository.AlcoholRepository;
-import com.metime.alcohol.repository.comment.CommentRepository;
+import com.metime.comment.repository.CommentRepository;
 
 import lombok.RequiredArgsConstructor;
 

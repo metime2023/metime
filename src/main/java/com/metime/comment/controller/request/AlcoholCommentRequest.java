@@ -1,4 +1,4 @@
-package com.metime.alcohol.controller.comment.request;
+package com.metime.comment.controller.request;
 
 import jakarta.validation.constraints.NotEmpty;
 

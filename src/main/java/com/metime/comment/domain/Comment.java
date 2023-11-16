@@ -1,8 +1,9 @@
-package com.metime.alcohol.domain;
+package com.metime.comment.domain;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.metime.alcohol.domain.Alcohol;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
