@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.metime.alcohol.controller.request.PagingCondition;
 import com.metime.alcohol.domain.Alcohol;
+import com.metime.alcohol.dto.PagingDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;
@@ -21,15 +21,17 @@ public class AlcoholRepositoryExtensionImpl implements AlcoholRepositoryExtensio
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Alcohol> getAlcoholPerPage(PagingCondition pagingCondition) {
+    public List<Alcohol> getAlcoholPerPage(PagingDto pagingDto) {
         List<Long> alcoholIds = queryFactory
             .select(alcohol.id)
             .from(alcohol)
             .where(
-                alcohol.id.gt(pagingCondition.cursorNo()),
-                alcohol.price.between(pagingCondition.minPrice(), pagingCondition.maxPrice())
+                alcohol.id.gt(pagingDto.cursorNo()),
+                alcohol.price.between(pagingDto.minPrice(), pagingDto.maxPrice()),
+                alcohol.id.gt(pagingDto.cursorNo()),
+                alcohol.price.between(pagingDto.minPrice(), pagingDto.maxPrice())
             )
-            .limit(pagingCondition.displayPerPage())
+            .limit(pagingDto.displayPerPage())
             .fetch();
 
         return queryFactory

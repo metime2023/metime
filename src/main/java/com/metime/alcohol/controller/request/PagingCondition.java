@@ -2,6 +2,8 @@ package com.metime.alcohol.controller.request;
 
 import com.metime.alcohol.common.annotation.SortCondition;
 import com.metime.alcohol.domain.AlcoholSort;
+import com.metime.alcohol.dto.PagingDto;
+
 import jakarta.validation.constraints.Min;
 
 public record PagingCondition(
@@ -18,5 +20,15 @@ public record PagingCondition(
 
         public boolean isCursorDefaultValue() {
                 return this.cursorNo <= DEFAULT_VALUE;
+        }
+
+        public PagingDto toDto() {
+                return PagingDto.builder()
+                    .cursorNo(this.cursorNo)
+                    .displayPerPage(this.displayPerPage)
+                    .sort(this.sort)
+                    .minPrice(this.minPrice)
+                    .maxPrice(this.maxPrice)
+                    .build();
         }
 }

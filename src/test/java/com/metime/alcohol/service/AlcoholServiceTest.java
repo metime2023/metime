@@ -36,10 +36,10 @@ class AlcoholServiceTest {
 		List<Alcohol> expect = List.of(ALCOHOL_FIXTURE);
 		PagingCondition pagingCondition =
 				new PagingCondition(0, 5, "recommend", 0, 5000);
-		given(alcoholRepository.getAlcoholPerPage(pagingCondition)).willReturn(expect);
+		given(alcoholRepository.getAlcoholPerPage(pagingCondition.toDto())).willReturn(expect);
 
 		// when
-		List<AlcoholDto> actual = sut.getAlcoholPerPage(pagingCondition);
+		List<AlcoholDto> actual = sut.getAlcoholPerPage(pagingCondition.toDto());
 
 		// then
 		assertThat(actual).usingRecursiveFieldByFieldElementComparator()
