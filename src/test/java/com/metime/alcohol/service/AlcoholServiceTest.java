@@ -5,63 +5,58 @@ import com.metime.alcohol.domain.Alcohol;
 import com.metime.alcohol.dto.AlcoholDto;
 import com.metime.alcohol.repository.AlcoholRepository;
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import static com.metime.alcohol.fixture.alcohol.AlcoholFixture.ALCOHOL_FIXTURE;
+import static com.metime.global.fixture.alcohol.AlcoholFixture.ALCOHOL_FIXTURE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
 @RequiredArgsConstructor
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@Transactional
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @SpringBootTest
 class AlcoholServiceTest {
 
-	private final AlcoholService alcoholService;
-	private final AlcoholRepository alcoholRepository;
+	private static final long DEFAULT_ALCOHOL_ID = 1L;
 
-	private List<Alcohol> alcoholList = new ArrayList<>();
+	@InjectMocks
+	private AlcoholService sut;
 
-	@BeforeEach
-	void setUp() {
-		alcoholList.add(ALCOHOL_FIXTURE);
-		alcoholRepository.saveAll(alcoholList);
-	}
+	@Mock
+	private AlcoholRepository alcoholRepository;
 
-	@DisplayName("주류 리스트 조회에 성공한다")
 	@Test
 	void 주류_리스트_조회에_성공한다() {
 		// given
+		List<Alcohol> expect = List.of(ALCOHOL_FIXTURE);
 		PagingCondition pagingCondition =
 				new PagingCondition(0, 5, "recommend", 0, 5000);
+		given(alcoholRepository.getAlcoholPerPage(pagingCondition)).willReturn(expect);
 
 		// when
-		List<AlcoholDto> alcoholDtoList = alcoholService.getAlcoholPerPage(pagingCondition);
+		List<AlcoholDto> actual = sut.getAlcoholPerPage(pagingCondition);
 
 		// then
-		assertThat(alcoholDtoList).usingRecursiveFieldByFieldElementComparator()
-				.isEqualTo(AlcoholDto.listFrom(alcoholList));
+		assertThat(actual).usingRecursiveFieldByFieldElementComparator()
+				.isEqualTo(AlcoholDto.listFrom(expect));
 	}
 
-	@DisplayName("주류 상세 조회에 성공한다")
 	@Test
 	void 주류_상세_조회에_성공한다() {
 		// given
-		Alcohol alcohol = alcoholRepository.findAll().get(0);
-		AlcoholDto expect = AlcoholDto.from(alcohol);
+		Alcohol expect = ALCOHOL_FIXTURE;
+		given(alcoholRepository.findById(DEFAULT_ALCOHOL_ID)).willReturn(Optional.of(ALCOHOL_FIXTURE));
 
 		// when
-		AlcoholDto actual = alcoholService.alcoholDetail(alcohol.getId());
+		AlcoholDto actual = sut.alcoholDetail(DEFAULT_ALCOHOL_ID);
 
 		// then
 		assertThat(actual).usingRecursiveComparison()
-				.isEqualTo(expect);
+				.isEqualTo(AlcoholDto.from(expect));
 	}
 }

@@ -1,4 +1,4 @@
-package com.metime.alcohol.service.comment;
+package com.metime.comment.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -7,7 +7,6 @@ import static org.mockito.BDDMockito.then;
 
 import java.util.Optional;
 
-import com.metime.comment.service.CommentService;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.metime.alcohol.common.exception.DoesNotExistAlcoholException;
 import com.metime.comment.domain.Comment;
-import com.metime.alcohol.fixture.alcohol.AlcoholFixture;
+import com.metime.global.fixture.alcohol.AlcoholFixture;
 import com.metime.alcohol.repository.AlcoholRepository;
 import com.metime.comment.repository.CommentRepository;
 

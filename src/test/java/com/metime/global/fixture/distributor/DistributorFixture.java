@@ -1,4 +1,4 @@
-package com.metime.alcohol.fixture.distributor;
+package com.metime.global.fixture.distributor;
 
 import com.metime.alcohol.domain.distributor.Distributor;
 

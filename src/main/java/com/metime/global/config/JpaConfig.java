@@ -1,4 +1,4 @@
-package com.metime.global.common.config;
+package com.metime.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

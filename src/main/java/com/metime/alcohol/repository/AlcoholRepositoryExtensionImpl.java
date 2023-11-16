@@ -27,14 +27,14 @@ public class AlcoholRepositoryExtensionImpl implements AlcoholRepositoryExtensio
             .from(alcohol)
             .where(
                 alcohol.id.gt(pagingCondition.cursorNo()),
-                alcohol.price.value.between(pagingCondition.minPrice(), pagingCondition.maxPrice())
+                alcohol.price.between(pagingCondition.minPrice(), pagingCondition.maxPrice())
             )
             .limit(pagingCondition.displayPerPage())
             .fetch();
 
         return queryFactory
             .selectFrom(alcohol)
-            .leftJoin(alcohol.keywords.keywords, alcoholKeyword).fetchJoin()
+            .leftJoin(alcohol.keywords, alcoholKeyword).fetchJoin()
             .leftJoin(alcoholKeyword.keyword, keyword).fetchJoin()
             .where(alcohol.id.in(alcoholIds))
             .fetch();

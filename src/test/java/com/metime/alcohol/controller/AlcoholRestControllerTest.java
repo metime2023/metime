@@ -1,10 +1,10 @@
 package com.metime.alcohol.controller;
 
-import static com.metime.alcohol.fixture.alcohol.AlcoholFixture.ALCOHOL_FIXTURE;
-import static com.metime.alcohol.fixture.distributor.DistributorFixture.CONVENIENCE_STORE;
-import static com.metime.alcohol.fixture.distributor.DistributorFixture.SUPERMARKET;
-import static com.metime.alcohol.fixture.keyword.KeywordFixture.DILUTED_SOJU;
-import static com.metime.alcohol.fixture.keyword.KeywordFixture.DISTILLED_SOJU;
+import static com.metime.global.fixture.alcohol.AlcoholFixture.ALCOHOL_FIXTURE;
+import static com.metime.global.fixture.distributor.DistributorFixture.CONVENIENCE_STORE;
+import static com.metime.global.fixture.distributor.DistributorFixture.SUPERMARKET;
+import static com.metime.global.fixture.keyword.KeywordFixture.DILUTED_SOJU;
+import static com.metime.global.fixture.keyword.KeywordFixture.DISTILLED_SOJU;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

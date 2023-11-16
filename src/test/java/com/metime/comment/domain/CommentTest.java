@@ -1,9 +1,8 @@
-package com.metime.alcohol.domain;
+package com.metime.comment.domain;
 
-import static com.metime.alcohol.fixture.alcohol.AlcoholFixture.ALCOHOL_FIXTURE;
+import static com.metime.global.fixture.alcohol.AlcoholFixture.ALCOHOL_FIXTURE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.metime.comment.domain.Comment;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;

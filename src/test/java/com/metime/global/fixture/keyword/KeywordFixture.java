@@ -1,4 +1,4 @@
-package com.metime.alcohol.fixture.keyword;
+package com.metime.global.fixture.keyword;
 
 import com.metime.alcohol.domain.keyword.Keyword;
 

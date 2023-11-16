@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static com.metime.global.fixture.alcohol.AlcoholFixture.ALCOHOL_FIXTURE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -16,12 +17,18 @@ class AlcoholTest {
 	void 올바른_길이로_이름_설정에_성공한다(int length) {
 		// given
 		String name = "1".repeat(length);
+		Alcohol alcohol = Alcohol.builder()
+				.name(name)
+				.description(ALCOHOL_FIXTURE.getDescription())
+				.price(ALCOHOL_FIXTURE.getPrice())
+				.category(ALCOHOL_FIXTURE.getCategory())
+				.build();
 
 		// when
-		AlcoholName alcoholName = AlcoholName.from(name);
+		String alcoholName = alcohol.getName();
 
 		// then
-		assertThat(alcoholName.getValue()).isEqualTo(name);
+		assertThat(alcoholName).isEqualTo(name);
 	}
 
 	@DisplayName("올바르지 않은 길이로 이름 설정에 실패한다")
@@ -32,7 +39,12 @@ class AlcoholTest {
 		String name = "1".repeat(length);
 
 		// when, then
-		assertThatThrownBy(() -> AlcoholName.from(name))
+		assertThatThrownBy(() -> Alcohol.builder()
+				.name(name)
+				.description(ALCOHOL_FIXTURE.getDescription())
+				.price(ALCOHOL_FIXTURE.getPrice())
+				.category(ALCOHOL_FIXTURE.getCategory())
+				.build())
 				.isInstanceOf(RuntimeException.class);
 	}
 
@@ -44,7 +56,12 @@ class AlcoholTest {
 		String name = value;
 
 		// when, then
-		assertThatThrownBy(() -> AlcoholName.from(name))
+		assertThatThrownBy(() -> Alcohol.builder()
+				.name(name)
+				.description(ALCOHOL_FIXTURE.getDescription())
+				.price(ALCOHOL_FIXTURE.getPrice())
+				.category(ALCOHOL_FIXTURE.getCategory())
+				.build())
 				.isInstanceOf(RuntimeException.class);
 	}
 }
