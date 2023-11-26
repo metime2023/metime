@@ -7,7 +7,7 @@ import java.util.List;
 public record AlcoholDetailPageResponse(
 	String name,
 	String description,
-	double price,
+	int price,
 	String category,
 	List<String> distributors,
 	List<String> keywords,
