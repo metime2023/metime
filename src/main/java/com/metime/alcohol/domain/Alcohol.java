@@ -27,31 +27,41 @@ public class Alcohol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // PK
 
-    private String name;
+    private String name; // 이름
 
-    private String description;
+    private String description; // 설명
 
-    private int price;
-
-    @OneToMany(mappedBy = "alcohol", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<AlcoholDistributor> distributors = new ArrayList<>();
+    private int price; // 가격
 
     @OneToMany(mappedBy = "alcohol", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<AlcoholKeyword> keywords = new ArrayList<>();
+    private final List<AlcoholDistributor> distributors = new ArrayList<>(); // 판매처
+
+    @OneToMany(mappedBy = "alcohol", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<AlcoholKeyword> keywords = new ArrayList<>(); // 키워드
 
     @Enumerated(EnumType.STRING)
-    private Category category;
+    private Category category; // 카테고리
 
-    private String imageUrl;
+    private int sugarContent; // 당도
+
+    private int acidity; // 산도
+
+    private int body; // 바디
+
+    private String imageUrl; // 이미지 URL
 
     @Builder
-    private Alcohol(String name, String description, int price, Category category, String imageUrl) {
+    private Alcohol(String name, String description, int price, Category category,
+        int sugarContent, int acidity, int body, String imageUrl) {
         setName(name);
         setDescription(description);
         setPrice(price);
         this.category = category;
+        this.sugarContent = sugarContent;
+        this.acidity = acidity;
+        this.body = body;
         this.imageUrl = imageUrl;
     }
 
