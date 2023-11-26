@@ -13,10 +13,13 @@ import lombok.Builder;
 public record AlcoholDto(
 		String name,
 		String description,
-		double price,
+		int price,
 		Category category,
 		List<Distributor> distributors,
 		List<Keyword> keywords,
+		int sugarContent,
+		int acidity,
+		int body,
 		long likeCount,
 		long commentCount
 ) {
@@ -29,6 +32,9 @@ public record AlcoholDto(
 				.category(alcohol.getCategory())
 				.distributors(alcohol.getDistributors())
 				.keywords(alcohol.getKeywords())
+                .sugarContent(alcohol.getSugarContent())
+                .acidity(alcohol.getAcidity())
+                .body(alcohol.getBody())
 				.build();
 	}
 
@@ -40,6 +46,9 @@ public record AlcoholDto(
 				.category(alcohol.getCategory())
 				.distributors(null)
 				.keywords(alcohol.getKeywords())
+                .sugarContent(alcohol.getSugarContent())
+                .acidity(alcohol.getAcidity())
+                .body(alcohol.getBody())
 				.build();
 	}
 

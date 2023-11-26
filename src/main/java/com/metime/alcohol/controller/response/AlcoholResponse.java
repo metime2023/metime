@@ -7,9 +7,12 @@ import java.util.List;
 public record AlcoholResponse(
     String name,
     String description,
-    double price,
+    int price,
     String category,
     List<String> keywords,
+    int sugarContent,
+    int acidity,
+    int body,
     long likeCount,
     long commentCount
 ) {
@@ -21,6 +24,9 @@ public record AlcoholResponse(
             alcoholDto.price(),
             alcoholDto.category().getTitle(),
             alcoholDto.convertKeywordsToTitleList(),
+            alcoholDto.sugarContent(),
+            alcoholDto.acidity(),
+            alcoholDto.body(),
             alcoholDto.likeCount(),
             alcoholDto.commentCount());
     }
