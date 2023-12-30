@@ -44,6 +44,10 @@ public class Alcohol {
     @Enumerated(EnumType.STRING)
     private Category category; // 카테고리
 
+    private double degree; // 도수
+
+    private int capacity; // 용량 (ml)
+
     private int sugarContent; // 당도
 
     private int acidity; // 산도
@@ -54,10 +58,12 @@ public class Alcohol {
 
     @Builder
     private Alcohol(String name, String description, int price, Category category,
-        int sugarContent, int acidity, int body, String imageUrl) {
+        int degree, int capacity, int sugarContent, int acidity, int body, String imageUrl) {
         setName(name);
         setDescription(description);
         setPrice(price);
+        this.degree = degree;
+        this.capacity = capacity;
         this.category = category;
         this.sugarContent = sugarContent;
         this.acidity = acidity;

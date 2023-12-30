@@ -9,10 +9,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Category {
 
-    BEER(1, "맥주"),
-    WINE(2, "와인"),
-    WHISKEY(3, "위스키"),
-    ETC(4, "기타");
+    LAGER(1, "라거"),
+    WHITE_BEER(2, "밀맥주"),
+    BLACK_BEER(3, "흑맥주"),
+    RED_WINE(4, "레드와인"),
+    WHITE_WINE(5, "화이트와인"),
+    WHISKEY(6, "위스키");
 
     private final long id;
     private final String title;
