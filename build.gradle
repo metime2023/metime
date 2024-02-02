@@ -11,6 +11,13 @@ java {
 	sourceCompatibility = '17'
 }
 
+// application.yml에 프로젝트 버전과 그룹을 추가하는 작업
+processResources {
+	filesMatching('application.yml') {
+		expand(project.properties)
+	}
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -38,6 +45,8 @@ dependencies {
 	testAnnotationProcessor 'org.projectlombok:lombok'
 
 	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

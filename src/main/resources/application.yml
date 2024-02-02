@@ -1,3 +1,7 @@
+server:
+  title: Metime
+  version: ${version} # Gradle에서 설정한 버전 정보 사용
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
