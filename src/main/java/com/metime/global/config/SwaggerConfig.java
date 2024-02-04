@@ -1,24 +1,19 @@
 package com.metime.global.config;
 
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Info;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 
 @Configuration
 public class SwaggerConfig {
 
-	@Value("${server.title}")
-	private String applicationTitle;
-	@Value("${server.version}")
-	private String applicationVersion;
-
-	@Bean
-	public OpenAPI openAPI() {
-		return new OpenAPI()
-			.info(new Info()
-			.title(applicationTitle)
-			.version(applicationVersion));
-	}
+    @Bean
+    public OpenAPI openAPI() {
+        return new OpenAPI().info(new Info()
+            .title("Metime")
+            .description("주류 추천 서비스")
+            .version("1.0"));
+    }
 }

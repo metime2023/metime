@@ -1,6 +1,6 @@
 server:
   title: Metime
-  version: ${version} # Gradle에서 설정한 버전 정보 사용
+  version: ${version}
 
 spring:
   datasource:
