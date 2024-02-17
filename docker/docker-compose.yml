@@ -11,6 +11,7 @@ services:
       MYSQL_PASSWORD: password
       MYSQL_DATABASE: metime
       TZ: Asia/Seoul
+      LC_ALL: C.UTF-8
     ports:
       - "13306:3306"
     volumes:
