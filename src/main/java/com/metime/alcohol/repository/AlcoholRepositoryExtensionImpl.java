@@ -21,13 +21,11 @@ public class AlcoholRepositoryExtensionImpl implements AlcoholRepositoryExtensio
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Alcohol> getAlcoholPerPage(PagingDto pagingDto) {
+    public List<Alcohol> findAlcoholList(PagingDto pagingDto) {
         List<Long> alcoholIds = queryFactory
             .select(alcohol.id)
             .from(alcohol)
             .where(
-                alcohol.id.gt(pagingDto.cursorNo()),
-                alcohol.price.between(pagingDto.minPrice(), pagingDto.maxPrice()),
                 alcohol.id.gt(pagingDto.cursorNo()),
                 alcohol.price.between(pagingDto.minPrice(), pagingDto.maxPrice())
             )

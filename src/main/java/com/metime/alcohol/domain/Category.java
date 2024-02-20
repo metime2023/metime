@@ -23,6 +23,10 @@ public enum Category {
         return Arrays.stream(values())
             .filter(category -> category.id == id)
             .findFirst()
-            .orElseThrow(() -> new RuntimeException());
+            .orElseThrow(RuntimeException::new);
+    }
+
+    public boolean isWine() {
+        return this == RED_WINE || this == WHITE_WINE;
     }
 }

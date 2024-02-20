@@ -1,13 +1,12 @@
 package com.metime.alcohol.service;
 
+import com.metime.alcohol.dto.response.AlcoholResponse;
 import com.metime.alcohol.domain.Alcohol;
-import com.metime.alcohol.dto.AlcoholDto;
 import com.metime.alcohol.dto.PagingDto;
 import com.metime.alcohol.repository.AlcoholRepository;
 
 import java.util.List;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,16 +19,16 @@ public class AlcoholService {
 
     private final AlcoholRepository alcoholRepository;
 
-    public List<AlcoholDto> getAlcoholPerPage(PagingDto pagingDto) {
-        List<Alcohol> alcoholList = alcoholRepository.getAlcoholPerPage(pagingDto);
+    public List<AlcoholResponse> findAlcoholList(PagingDto pagingDto) {
+        List<Alcohol> alcoholList = alcoholRepository.findAlcoholList(pagingDto);
 
-        return AlcoholDto.listFrom(alcoholList);
+        return AlcoholResponse.listFrom(alcoholList);
     }
 
-    public AlcoholDto alcoholDetail(long alcoholId) {
-        Alcohol alcohol = alcoholRepository.findById(alcoholId)
-                .orElseThrow(EntityNotFoundException::new);
+	public AlcoholResponse findAlcoholById(Long alcoholId) {
+		Alcohol alcohol = alcoholRepository.findById(alcoholId)
+				.orElseThrow(RuntimeException::new);
 
-        return AlcoholDto.from(alcohol);
-    }
+		return AlcoholResponse.from(alcohol);
+	}
 }

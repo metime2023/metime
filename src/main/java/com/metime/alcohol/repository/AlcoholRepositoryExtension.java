@@ -7,5 +7,5 @@ import com.metime.alcohol.dto.PagingDto;
 
 public interface AlcoholRepositoryExtension {
 
-    List<Alcohol> getAlcoholPerPage(PagingDto pagingDto);
+    List<Alcohol> findAlcoholList(PagingDto pagingDto);
 }
