@@ -1,11 +1,11 @@
-package com.metime.alcohol.common.exception.handler;
+package com.metime.alcohol.support.exception.handler;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.metime.alcohol.common.exception.DoesNotExistAlcoholException;
+import com.metime.alcohol.support.exception.DoesNotExistAlcoholException;
 
 @RestControllerAdvice
 public class RestControllerExceptionHandler {

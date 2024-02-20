@@ -1,6 +1,6 @@
 package com.metime.alcohol.dto.request;
 
-import com.metime.alcohol.common.annotation.SortCondition;
+import com.metime.alcohol.support.annotation.SortCondition;
 import com.metime.alcohol.domain.AlcoholSort;
 import com.metime.alcohol.dto.PagingDto;
 

@@ -3,7 +3,7 @@ package com.metime.comment.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.metime.alcohol.common.exception.DoesNotExistAlcoholException;
+import com.metime.alcohol.support.exception.DoesNotExistAlcoholException;
 import com.metime.alcohol.domain.Alcohol;
 import com.metime.comment.domain.Comment;
 import com.metime.alcohol.repository.AlcoholRepository;

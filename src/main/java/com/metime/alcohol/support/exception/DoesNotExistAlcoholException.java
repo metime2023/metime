@@ -1,4 +1,4 @@
-package com.metime.alcohol.common.exception;
+package com.metime.alcohol.support.exception;
 
 import org.springframework.http.HttpStatus;
 

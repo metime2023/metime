@@ -1,4 +1,4 @@
-package com.metime.alcohol.common.annotation;
+package com.metime.alcohol.support.annotation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
