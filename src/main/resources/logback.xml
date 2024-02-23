@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>[%X{request_id:-startup}] [%d{yyyy-MM-dd HH:mm:ss}:%-4relative] %green([%thread]) %highlight(%-5level) %boldWhite([%C.%M:%yellow(%L)]) - %msg %ex{5}%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="ROLLING_FILE_OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>./logs/metime.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>./logs/metime.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>[%X{request_id:-startup}] %date{ISO8601} %level - %msg - %caller{1}</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.metime" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING_FILE_OUT" />
+	</logger>
+
+	<logger name="com.metime" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING_FILE_OUT" />
+	</logger>
+
+	<root level="ERROR">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="ROLLING_FILE_OUT" />
+	</root>
+</configuration>

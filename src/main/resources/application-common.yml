@@ -1,0 +1,6 @@
+server:
+  port: 8080
+
+application:
+  title: Metime 주류 추천 서비스
+  version: 1.0

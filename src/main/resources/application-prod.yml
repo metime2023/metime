@@ -1,6 +1,6 @@
 spring:
   config:
-    import: metime-security/application-security.yml
+    import: application-common.yml, metime-security/application-security.yml
   jpa:
     open-in-view: false
     hibernate:
