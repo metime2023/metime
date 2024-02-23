@@ -8,9 +8,9 @@
 	</appender>
 
 	<appender name="ROLLING_FILE_OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>./logs/metime.log</file>
+		<file>../../logs/metime.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>./logs/metime.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>../../logs/metime.%d{yyyy-MM-dd}.log</fileNamePattern>
 		</rollingPolicy>
 		<encoder>
 			<charset>UTF-8</charset>
