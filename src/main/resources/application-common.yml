@@ -9,3 +9,7 @@ decorator:
   datasource:
     p6spy:
       enable-logging: true
+
+springdoc:
+  swagger-ui:
+    path: /api-docs.html
