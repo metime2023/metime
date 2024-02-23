@@ -4,3 +4,8 @@ server:
 application:
   title: Metime 주류 추천 서비스
   version: 1.0
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
