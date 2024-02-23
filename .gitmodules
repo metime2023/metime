@@ -1,0 +1,3 @@
+[submodule "src/main/resources/metime-security"]
+	path = src/main/resources/metime-security
+	url = https://github.com/metime2023/metime-security.git
