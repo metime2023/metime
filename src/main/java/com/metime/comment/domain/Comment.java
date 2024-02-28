@@ -33,6 +33,7 @@ public class Comment {
 
 	private Comment(Alcohol alcohol, String content) {
 		this.alcohol = alcohol;
+		this.alcohol.addComment(this);
 		this.content = content;
 		this.createdAt = LocalDateTime.now();
 	}

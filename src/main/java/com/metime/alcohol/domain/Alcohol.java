@@ -7,6 +7,7 @@ import com.metime.alcohol.domain.distributor.AlcoholDistributor;
 import com.metime.alcohol.domain.distributor.Distributor;
 import com.metime.alcohol.domain.keyword.AlcoholKeyword;
 import com.metime.alcohol.domain.keyword.Keyword;
+import com.metime.comment.domain.Comment;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -40,6 +41,9 @@ public class Alcohol {
 
 	@OneToMany(mappedBy = "alcohol", cascade = CascadeType.ALL, orphanRemoval = true)
 	private final List<AlcoholKeyword> keywords = new ArrayList<>(); // 키워드
+
+	@OneToMany(mappedBy = "alcohol", cascade = CascadeType.ALL, orphanRemoval = true)
+	private final List<Comment> comments = new ArrayList<>(); // 댓글
 
 	@Enumerated(EnumType.STRING)
 	private Category category; // 카테고리
@@ -76,6 +80,10 @@ public class Alcohol {
 		this.thumbnailImageUrl = thumbnailImageUrl;
 		this.detailImageUrl = detailImageUrl;
 		this.star = star;
+	}
+
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
 	}
 
 	// name

@@ -3,6 +3,7 @@ package com.metime.alcohol.dto.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.metime.alcohol.domain.Alcohol;
 import com.metime.alcohol.domain.Category;
+import com.metime.comment.dto.response.CommentResponse;
 import lombok.Builder;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public record AlcoholResponse(
 		String detailImageUrl,
 		List<String> distributors,
 		List<String> keywords,
+		List<CommentResponse> comments,
 		@JsonInclude(JsonInclude.Include.NON_NULL) WineFlavor wineFlavor,
 		ReactionCount reactionCount
 ) {
@@ -42,6 +44,7 @@ public record AlcoholResponse(
 				.detailImageUrl(alcohol.getDetailImageUrl())
 				.distributors(alcohol.convertDistributorsToNameList())
 				.keywords(alcohol.convertKeywordsToTitleList())
+				.comments(CommentResponse.listFrom(alcohol.getComments()))
 				.wineFlavor(wf)
 				.reactionCount(ReactionCount.of(0, 0))
 				.build();
