@@ -11,7 +11,7 @@ import java.util.List;
 public record AlcoholResponse(
 		Long id,
 		String name,
-		String description,
+		String engName,
 		int price,
 		String category,
 		int capacity,
@@ -33,7 +33,7 @@ public record AlcoholResponse(
 		return AlcoholResponse.builder()
 				.id(alcohol.getId())
 				.name(alcohol.getName())
-				.description(alcohol.getDescription())
+				.engName(alcohol.getEngName())
 				.price(alcohol.getPrice())
 				.capacity(alcohol.getCapacity())
 				.starCount(alcohol.getStar())

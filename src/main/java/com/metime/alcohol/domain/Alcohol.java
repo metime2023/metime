@@ -20,8 +20,8 @@ public class Alcohol {
 
 	private static final int NAME_MINIMUM_LENGTH = 1;
 	private static final int NAME_MAXIMUM_LENGTH = 50;
-	private static final int DESCRIPTION_MINIMUM_LENGTH = 1;
-	private static final int DESCRIPTION_MAXIMUM_LENGTH = 200;
+	private static final int ENG_NAME_MINIMUM_LENGTH = 1;
+	private static final int ENG_NAME_MAXIMUM_LENGTH = 200;
 	private static final int PRICE_MINIMUM = 0;
 	private static final int PRICE_MAXIMUM = 100_000_000;
 
@@ -31,7 +31,7 @@ public class Alcohol {
 
 	private String name; // 이름
 
-	private String description; // 설명
+	private String engName; // 영어 이름
 
 	private int price; // 가격
 
@@ -61,11 +61,11 @@ public class Alcohol {
 	private int star;
 
 	@Builder
-	private Alcohol(String name, String description, int price, Category category,
+	private Alcohol(String name, String engName, int price, Category category,
 	                int degree, int capacity, int sugarContent, int acidity, int body,
 	                String thumbnailImageUrl, String detailImageUrl, int star) {
 		setName(name);
-		setDescription(description);
+		setEngName(engName);
 		setPrice(price);
 		this.degree = degree;
 		this.capacity = capacity;
@@ -98,22 +98,22 @@ public class Alcohol {
 		}
 	}
 
-	// description
-	private void setDescription(String description) {
-		validateDescriptionNotBlank(description);
-		validateDescriptionLengthInRange(description);
-		this.description = description;
+	// engName
+	private void setEngName(String engName) {
+		validateEngNameNotBlank(engName);
+		validateEngNameLengthInRange(engName);
+		this.engName = engName;
 	}
 
-	private void validateDescriptionNotBlank(String description) {
-		if (description.isBlank()) {
+	private void validateEngNameNotBlank(String engName) {
+		if (engName.isBlank()) {
 			throw new RuntimeException();
 		}
 	}
 
-	private void validateDescriptionLengthInRange(String description) {
-		int length = description.length();
-		if (length < DESCRIPTION_MINIMUM_LENGTH || DESCRIPTION_MAXIMUM_LENGTH < length) {
+	private void validateEngNameLengthInRange(String engName) {
+		int length = engName.length();
+		if (length < ENG_NAME_MINIMUM_LENGTH || ENG_NAME_MAXIMUM_LENGTH < length) {
 			throw new RuntimeException();
 		}
 	}
