@@ -3,7 +3,7 @@ spring:
     import: application-common.yml
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:13306/metime?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/metime?useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
     username: root
     password: root
   jpa:
