@@ -24,7 +24,8 @@ public class AlcoholRestController {
 	private final AlcoholService alcoholService;
 
 	@Operation(summary = "주류 리스트 조회")
-	@Parameter(name = "alcoholSearchRequest", in = ParameterIn.QUERY, description = "sort: RECOMMEND, ARCHIVE, COMMENT, STAR_SCORE")
+	@Parameter(name = "alcoholSearchRequest",
+		in = ParameterIn.QUERY, description = "SORT: RECOMMEND(추천순), ARCHIVE(인기순), COMMENT(댓글순), STAR_SCORE(별점순)")
 	@GetMapping("/alcohol")
 	public List<AlcoholResponse> findAlcoholList(@ModelAttribute AlcoholSearchRequest alcoholSearchRequest) {
 		return alcoholService.findAlcoholList(alcoholSearchRequest.toDto());
