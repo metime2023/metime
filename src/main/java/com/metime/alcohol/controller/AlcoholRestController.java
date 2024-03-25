@@ -30,7 +30,7 @@ public class AlcoholRestController {
 		in = ParameterIn.QUERY, description = "SORT: RECOMMEND(추천순), ARCHIVE(인기순), COMMENT(댓글순), STAR_SCORE(별점순)")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200",
-					description = "CATEGORY: LAGER(라거), WHITE_BEER(밀맥주), BLACK_BEER(흑맥주), RED_WINE(레드와인), WHITE_WINE(화이트와인), WHISKY(위스키)",
+					description = "CATEGORY: LAGER(라거), WHITE_BEER(밀맥주), BLACK_BEER(흑맥주), RED_WINE(레드와인), WHITE_WINE(화이트와인), WHISKY(위스키), SPARKLING(스파클링), ROSE(로제)",
 					useReturnTypeSchema = true)
 	})
 	@GetMapping("/alcohol")
