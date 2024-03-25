@@ -14,7 +14,9 @@ public enum Category {
     BLACK_BEER(3, "흑맥주"),
     RED_WINE(4, "레드와인"),
     WHITE_WINE(5, "화이트와인"),
-    WHISKEY(6, "위스키");
+    WHISKEY(6, "위스키"),
+    SPARKLING(7, "스파클링"),
+    ROSE(8, "로제");
 
     private final long id;
     private final String title;
