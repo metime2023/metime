@@ -9,6 +9,8 @@ import java.util.List;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,11 @@ public class AlcoholRestController {
 	@Operation(summary = "주류 리스트 조회")
 	@Parameter(name = "alcoholSearchRequest",
 		in = ParameterIn.QUERY, description = "SORT: RECOMMEND(추천순), ARCHIVE(인기순), COMMENT(댓글순), STAR_SCORE(별점순)")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200",
+					description = "CATEGORY: LAGER(라거), WHITE_BEER(밀맥주), BLACK_BEER(흑맥주), RED_WINE(레드와인), WHITE_WINE(화이트와인), WHISKY(위스키)",
+					useReturnTypeSchema = true)
+	})
 	@GetMapping("/alcohol")
 	public List<AlcoholResponse> findAlcoholList(@ModelAttribute AlcoholSearchRequest alcoholSearchRequest) {
 		return alcoholService.findAlcoholList(alcoholSearchRequest.toDto());
